@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddMonster">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="84dp"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/intelligence"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:text="Intelligence"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/strength"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:text="Strength"
+        app:layout_constraintStart_toStartOf="@+id/intelligence"
+        app:layout_constraintTop_toBottomOf="@+id/intelligence" />
+
+    <TextView
+        android:id="@+id/endurance"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:text="Endurance"
+        app:layout_constraintStart_toStartOf="@+id/strength"
+        app:layout_constraintTop_toBottomOf="@+id/strength" />
+
+    <EditText
+        android:id="@+id/ip_name"
+        android:layout_width="250dp"
+        android:layout_height="32dp"
+        android:textSize="11dp"
+        android:layout_marginStart="20dp"
+        android:hint="Enter Name"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/name" />
+
+    <Spinner
+        android:id="@+id/ip_intelligence"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/intelligence"
+        app:layout_constraintStart_toEndOf="@+id/intelligence"
+        app:layout_constraintTop_toTopOf="@+id/intelligence" />
+
+    <Spinner
+        android:id="@+id/ip_strength"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/strength"
+        app:layout_constraintStart_toEndOf="@+id/intelligence"
+        app:layout_constraintTop_toTopOf="@+id/strength" />
+
+    <Spinner
+        android:id="@+id/ip_endurance"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/endurance"
+        app:layout_constraintStart_toEndOf="@+id/intelligence"
+        app:layout_constraintTop_toTopOf="@+id/endurance" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="Hit Points"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ip_endurance" />
+
+    <TextView
+        android:id="@+id/hitpoints"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="40"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Save Monster"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hitpoints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
