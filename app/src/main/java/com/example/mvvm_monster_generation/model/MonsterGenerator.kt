@@ -6,7 +6,7 @@ class MonsterGenerator {
         val hitpoins = 5 * attributes.intelligence +
                 4 * attributes.endurance +
                 3 * attributes.strength
-//        return Monster(attributes, name, hitpoins)
+
         return Monster(name,hitpoins,drawable,attributes.intelligence,attributes.strength,attributes.endurance)
     }
 }

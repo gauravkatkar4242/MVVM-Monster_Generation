@@ -1,6 +1,7 @@
 package com.example.mvvm_monster_generation.model
 
 import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 //data class Monster(
 //    val attributes: MonsterAttributes = MonsterAttributes(),
@@ -10,6 +11,8 @@ import io.realm.RealmObject
 //)
 
 open class Monster(
+
+    @PrimaryKey
     var name: String = "",
     var hitpoints: Int = 0,
     var drawable: Int = 0,
