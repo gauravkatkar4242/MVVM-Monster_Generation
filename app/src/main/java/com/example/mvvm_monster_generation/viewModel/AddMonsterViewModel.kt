@@ -9,6 +9,7 @@ import com.example.mvvm_monster_generation.model.Monster
 import com.example.mvvm_monster_generation.model.MonsterAttributes
 import com.example.mvvm_monster_generation.model.MonsterGenerator
 import com.example.mvvm_monster_generation.utils.PerformanceParameters
+import com.example.mvvm_monster_generation.utils.PerformanceParametersSealedClass
 import io.realm.Realm
 import java.lang.Exception
 import java.text.FieldPosition
@@ -41,20 +42,22 @@ class AddMonsterViewModel(private val generator: MonsterGenerator = MonsterGener
         hit1.value = hitPoint
     }
 
-    fun onAttributedSelected(attribute: PerformanceParameters, position: Int){
-//        when (attribute){
-//            1 ->
-//                this.intelligence = (position) * 3
-//            2 ->
-//                this.endurance = (position) * 3
-//            3 ->
-//                this.strength = (position) * 3
+//    fun onAttributedSelected(attribute: PerformanceParameters, position: Int){
+//        when(attribute) {
+//            PerformanceParameters.INTELLIGENCE -> this.intelligence = (position) * 3
+//            PerformanceParameters.ENDURANCE -> this.endurance = (position) * 3
+//            PerformanceParameters.STRENGTH -> this.strength = (position) * 3
 //        }
+//
+//        updateMonster()
+//    }
 
+
+    fun onAttributedSelected(attribute: PerformanceParametersSealedClass, position: Int){
         when(attribute) {
-            PerformanceParameters.INTELLIGENCE -> this.intelligence = (position) * 3
-            PerformanceParameters.ENDURANCE -> this.endurance = (position) * 3
-            PerformanceParameters.STRENGTH -> this.strength = (position) * 3
+            is PerformanceParametersSealedClass.intelligence -> intelligence = (position) * 3
+            is PerformanceParametersSealedClass.endurance -> endurance = (position) * 3
+            is PerformanceParametersSealedClass.strength -> strength = (position) * 3
         }
 
         updateMonster()
