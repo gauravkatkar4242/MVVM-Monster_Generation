@@ -9,35 +9,29 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.mvvm_monster_generation.R
+import com.example.mvvm_monster_generation.databinding.ActivityAddMonsterBinding
+import com.example.mvvm_monster_generation.databinding.ActivityMainBinding
 import com.example.mvvm_monster_generation.utils.PerformanceParameters
 import com.example.mvvm_monster_generation.viewModel.AddMonsterViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AddMonsterActivity : AppCompatActivity() {
 
-
-    lateinit var intelligence_spinner: Spinner
-    lateinit var stregth_spinner: Spinner
-    lateinit var endurance_spinner: Spinner
-    lateinit var hitpoints: TextView
-
-    private lateinit var viewModel : AddMonsterViewModel
+    private lateinit var viewModel: AddMonsterViewModel
+    private lateinit var binding: ActivityAddMonsterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_monster)
 
-        intelligence_spinner = findViewById<Spinner>(R.id.ip_intelligence)
-        stregth_spinner = findViewById(R.id.ip_strength)
-        endurance_spinner = findViewById<Spinner>(R.id.ip_endurance)
-        hitpoints = findViewById<TextView>(R.id.hitpoints)
+        binding = ActivityAddMonsterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[AddMonsterViewModel::class.java]
 
         configSpinerAdaptors()
 
         viewModel.getMonsterLiveData().observe(this, Observer { monster ->
-            hitpoints.setText(monster.hitpoints.toString())
+            binding.hitpoints.setText(monster.hitpoints.toString())
 
         })
 
@@ -50,40 +44,47 @@ class AddMonsterActivity : AppCompatActivity() {
 
     private fun configSpinerAdaptors() {
 
-        val intelligence_options = arrayOf("No Selection", "Ant Man","Black Widow","Tony Stark")
-        val endurance_options = arrayOf("No Selection","Thor","Hulk","Captain Marval")
-        val strength_options = arrayOf("No Selection", "Spider Man","Captain America","Iron Man")
+        val intelligence_options = arrayOf("No Selection", "Ant Man", "Black Widow", "Tony Stark")
+        val endurance_options = arrayOf("No Selection", "Thor", "Hulk", "Captain Marval")
+        val strength_options = arrayOf("No Selection", "Spider Man", "Captain America", "Iron Man")
 
-        intelligence_spinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,intelligence_options)
-        endurance_spinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,endurance_options)
-        stregth_spinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,strength_options)
+        binding.ipIntelligence.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, intelligence_options)
+        binding.ipEndurance.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, endurance_options)
+        binding.ipStrength.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strength_options)
 
-        intelligence_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Log.d("AddMontser Acticity", "On item selected intelligence_spinner $p2")
-                viewModel.onAttributedSelected(PerformanceParameters.INTELLIGENCE,p2)
+        binding.ipIntelligence.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    Log.d("AddMontser Acticity", "On item selected intelligence_spinner $p2")
+                    viewModel.onAttributedSelected(PerformanceParameters.INTELLIGENCE, p2)
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    Log.d("AddMontser Acticity", "On nothing selected intelligence_spinner")
+                }
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.d("AddMontser Acticity", "On nothing selected intelligence_spinner")
-            }
-        }
 
-        endurance_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.ipEndurance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 Log.d("AddMontser Acticity", "On item selected endurance_spinner $p2")
-                viewModel.onAttributedSelected(PerformanceParameters.ENDURANCE,p2)
+                viewModel.onAttributedSelected(PerformanceParameters.ENDURANCE, p2)
 //                hitpoints.setText(viewModel.getMonsterLiveData().value?.hitpoints.toString())
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Log.d("AddMontser Acticity", "On nothing selected endurance_spinner")
             }
         }
-        stregth_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.ipStrength.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 Log.d("AddMontser Acticity", "On item selected stregth_spinner $p2")
-                viewModel.onAttributedSelected(PerformanceParameters.STRENGTH,p2)
+                viewModel.onAttributedSelected(PerformanceParameters.STRENGTH, p2)
 //                hitpoints.setText(viewModel.getMonsterLiveData().value?.hitpoints.toString())
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Log.d("AddMontser Acticity", "On nothing selected stregth_spinner")
             }
