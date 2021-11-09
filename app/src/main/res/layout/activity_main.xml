@@ -8,12 +8,14 @@
         android:layout_height="match_parent"
         tools:context=".view.MainActivity">
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rv_monster_list"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_monster_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,14 +29,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/op_text"
-        android:layout_width="341dp"
-        android:layout_height="356dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="68dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
