@@ -38,7 +38,14 @@ class AddMonsterActivity : AppCompatActivity() {
 
         var save_monster = findViewById<Button>(R.id.save)
         save_monster.setOnClickListener {
-            viewModel.insertInDB()
+            if (viewModel.insertInDB(binding.ipName.text.toString())){
+                Toast.makeText(this, "Successful",Toast.LENGTH_LONG)
+            }
+            else{
+                Toast.makeText(this, "Something went wrong",Toast.LENGTH_LONG)
+            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }

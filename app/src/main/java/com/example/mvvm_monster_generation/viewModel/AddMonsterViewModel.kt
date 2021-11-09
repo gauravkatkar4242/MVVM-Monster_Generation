@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mvvm_monster_generation.model.Monster
 import com.example.mvvm_monster_generation.model.MonsterAttributes
 import com.example.mvvm_monster_generation.model.MonsterGenerator
+import com.example.mvvm_monster_generation.utils.MonsterDAO
 import com.example.mvvm_monster_generation.utils.PerformanceParameters
 import com.example.mvvm_monster_generation.utils.PerformanceParametersSealedClass
 import io.realm.Realm
@@ -63,7 +64,10 @@ class AddMonsterViewModel(private val generator: MonsterGenerator = MonsterGener
         updateMonster()
     }
 
-    fun insertInDB() {
+    fun insertInDB(name: String): Boolean {
 
+        val monsterdao : MonsterDAO = MonsterDAO()
+        monster.name = name
+        return monsterdao.insertMonster(monster)
     }
 }

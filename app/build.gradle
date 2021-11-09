@@ -35,6 +35,9 @@ android {
         viewBinding = true
     }
 }
+realm {
+    syncEnabled = true
+}
 
 dependencies {
     var lifecycle_version = "2.4.0"
