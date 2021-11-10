@@ -1,42 +1,58 @@
 package com.example.mvvm_monster_generation.model
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mvvm_monster_generation.R
-import com.example.mvvm_monster_generation.databinding.ActivityMainBinding
-import org.w3c.dom.Text
+import com.example.mvvm_monster_generation.databinding.MonsterBinding
+import com.example.mvvm_monster_generation.utils.MonsterAdapterClickListener
 
-class MonsterAdapter(private val context: Context, private val dataset: List<Monster>?):
-    RecyclerView.Adapter<MonsterAdapter.MonsterViewHolder>()  {
+class MonsterAdapter(
+    private val context: Context,
+    private var dataset: List<Monster>?,
+    val clickListener: MonsterAdapterClickListener
+) :
+    RecyclerView.Adapter<MonsterAdapter.MonsterViewHolder>() {
 
-    class MonsterViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+    inner class MonsterViewHolder(val binding: MonsterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        var name = view.findViewById<TextView>(R.id.name)
-        var hitpoints = view.findViewById<TextView>(R.id.hitpoints)
+        init {
+            binding.delete.setOnClickListener {
+                if (dataset != null) {
+                    var currPosition = adapterPosition
+                    clickListener.onDeleteClicked(dataset!![currPosition])
+//                    notifyItemRemoved(currPosition)
+//                    notifyItemRangeChanged(currPosition, getItemCount());
 
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonsterViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.monster, parent, false)
+        val adapterLayout = MonsterBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MonsterViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: MonsterViewHolder, position: Int) {
 
-        val item = dataset?.get(position)
-        if (item != null) {
-            holder.name.setText(item.name)
-            holder.hitpoints.setText(item.hitpoints.toString())
+        dataset?.get(position).let { monster ->
+            holder.binding.name.text = monster?.name
+            holder.binding.hitpoints.text = monster?.hitpoints.toString()
+
         }
     }
 
     override fun getItemCount(): Int = dataset!!.size
+
+    fun updateData(listMOnster: List<Monster>) {
+        this.dataset = listMOnster
+        notifyDataSetChanged()
+
+    }
 
 }

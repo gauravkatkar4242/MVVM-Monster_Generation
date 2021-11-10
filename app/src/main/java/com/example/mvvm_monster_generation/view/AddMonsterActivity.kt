@@ -29,15 +29,15 @@ class AddMonsterActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[AddMonsterViewModel::class.java]
 
-        configSpinerAdaptors()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // for back button
 
-        viewModel.getMonsterLiveData().observe(this, Observer { monster ->
-            binding.hitpoints.setText(monster.hitpoints.toString())
+        configSpinnerAdaptors()
+        clickListeners()
+        observers()
+    }
 
-        })
-
-        var save_monster = findViewById<Button>(R.id.save)
-        save_monster.setOnClickListener {
+    private fun clickListeners(){
+        binding.save.setOnClickListener {
             if (viewModel.insertInDB(binding.ipName.text.toString())){
                 Toast.makeText(this, "Successful",Toast.LENGTH_LONG)
             }
@@ -47,13 +47,19 @@ class AddMonsterActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
 
-    private fun configSpinerAdaptors() {
+    private fun observers(){
+
+        viewModel.getMonsterLiveData().observe(this, Observer { monster ->
+            binding.hitpoints.text = monster.hitpoints.toString()
+        })
+
+    }
+    private fun configSpinnerAdaptors() {
 
         val intelligence_options = arrayOf("No Selection", "Ant Man", "Black Widow", "Tony Stark")
-        val endurance_options = arrayOf("No Selection", "Thor", "Hulk", "Captain Marval")
+        val endurance_options = arrayOf("No Selection", "Thor", "Hulk", "Captain Marvel")
         val strength_options = arrayOf("No Selection", "Spider Man", "Captain America", "Iron Man")
 
         binding.ipIntelligence.adapter =
@@ -66,19 +72,19 @@ class AddMonsterActivity : AppCompatActivity() {
         binding.ipIntelligence.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    Log.d("AddMontser Acticity", "On item selected intelligence_spinner $p2")
+                    Log.d("AddMonster Activity", "On item selected intelligence_spinner $p2")
 //                    viewModel.onAttributedSelected(PerformanceParameters.INTELLIGENCE, p2)
                     viewModel.onAttributedSelected(PerformanceParametersSealedClass.intelligence(),p2)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    Log.d("AddMontser Acticity", "On nothing selected intelligence_spinner")
+                    Log.d("AddMonster Activity", "On nothing selected intelligence_spinner")
                 }
             }
 
         binding.ipEndurance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Log.d("AddMontser Acticity", "On item selected endurance_spinner $p2")
+                Log.d("AddMonster Activity", "On item selected endurance_spinner $p2")
 //                viewModel.onAttributedSelected(PerformanceParameters.ENDURANCE, p2)
 //                hitpoints.setText(viewModel.getMonsterLiveData().value?.hitpoints.toString())
                 viewModel.onAttributedSelected(PerformanceParametersSealedClass.endurance(),p2)
@@ -86,12 +92,12 @@ class AddMonsterActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.d("AddMontser Acticity", "On nothing selected endurance_spinner")
+                Log.d("AddMonster Activity", "On nothing selected endurance_spinner")
             }
         }
         binding.ipStrength.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Log.d("AddMontser Acticity", "On item selected stregth_spinner $p2")
+                Log.d("AddMonster Activity", "On item selected strength_spinner $p2")
 //                viewModel.onAttributedSelected(PerformanceParameters.STRENGTH, p2)
 //                hitpoints.setText(viewModel.getMonsterLiveData().value?.hitpoints.toString())
                 viewModel.onAttributedSelected(PerformanceParametersSealedClass.strength(),p2)
@@ -99,8 +105,13 @@ class AddMonsterActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.d("AddMontser Acticity", "On nothing selected stregth_spinner")
+                Log.d("AddMonster Activity", "On nothing selected strength_spinner")
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -1,19 +1,14 @@
 package com.example.mvvm_monster_generation.viewModel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mvvm_monster_generation.model.Monster
 import com.example.mvvm_monster_generation.model.MonsterAttributes
 import com.example.mvvm_monster_generation.model.MonsterGenerator
-import com.example.mvvm_monster_generation.utils.MonsterDAO
-import com.example.mvvm_monster_generation.utils.PerformanceParameters
+import com.example.mvvm_monster_generation.DAO.MonsterDAOimplementation
 import com.example.mvvm_monster_generation.utils.PerformanceParametersSealedClass
-import io.realm.Realm
-import java.lang.Exception
-import java.text.FieldPosition
 
 class AddMonsterViewModel(private val generator: MonsterGenerator = MonsterGenerator()): ViewModel() {
 
@@ -66,7 +61,7 @@ class AddMonsterViewModel(private val generator: MonsterGenerator = MonsterGener
 
     fun insertInDB(name: String): Boolean {
 
-        val monsterdao : MonsterDAO = MonsterDAO()
+        val monsterdao : MonsterDAOimplementation = MonsterDAOimplementation()
         monster.name = name
         return monsterdao.insertMonster(monster)
     }

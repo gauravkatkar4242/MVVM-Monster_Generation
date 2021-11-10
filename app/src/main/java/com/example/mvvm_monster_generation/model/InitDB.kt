@@ -16,6 +16,7 @@ class InitDB : Application() {
             .name("Monster.db")
             .deleteRealmIfMigrationNeeded()
             .schemaVersion(1)
+            .allowWritesOnUiThread(true)
             .build()
 
         Realm.setDefaultConfiguration(config)
