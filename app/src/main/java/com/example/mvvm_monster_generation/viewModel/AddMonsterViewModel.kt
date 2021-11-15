@@ -16,8 +16,6 @@ class AddMonsterViewModel(private val generator: MonsterGenerator = MonsterGener
 
     fun getMonsterLiveData(): LiveData<Monster> = monsterLiveData
 
-
-
     var name: String = ""
     var hitpoints: Int = 0
     var drawable: Int = 0

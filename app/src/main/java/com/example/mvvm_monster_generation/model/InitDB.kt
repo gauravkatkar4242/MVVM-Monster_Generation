@@ -16,6 +16,7 @@ class InitDB : Application() {
             .name("Monster.db")
             .deleteRealmIfMigrationNeeded()
             .schemaVersion(1)
+            .allowQueriesOnUiThread(true)
             .allowWritesOnUiThread(true)
             .build()
 

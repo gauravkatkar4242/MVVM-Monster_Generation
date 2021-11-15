@@ -6,4 +6,6 @@ interface MonsterAdapterClickListener {
 
     fun onDeleteClicked(monster : Monster?)
 
+    fun submitNewData()
+
 }
